@@ -5,114 +5,340 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="副業デッキは、AIツール・副業に役立つSaaSを徹底比較・紹介するサイトです。あなたに合ったツールを見つけて、副業をもっとラクに始めましょう。">
   <title>副業デッキ｜AIツール・副業SaaS比較サイト</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Hiragino Sans', 'Noto Sans JP', sans-serif; color: #1a1a2e; background: #f8f9fa; }
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --accent: #f43f5e;
+      --bg: #0f0f13;
+      --bg2: #16161d;
+      --bg3: #1e1e28;
+      --surface: #23232f;
+      --border: rgba(255,255,255,0.08);
+      --text: #f1f1f3;
+      --muted: #9191a8;
+      --radius: 16px;
+    }
 
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', 'Noto Sans JP', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── HEADER ── */
     header {
-      background: #1a1a2e;
-      padding: 16px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15,15,19,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+      height: 64px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
-    header .logo { color: #fff; font-size: 1.4rem; font-weight: 700; text-decoration: none; }
-    header nav a { color: #ccc; text-decoration: none; margin-left: 24px; font-size: 0.9rem; }
-    header nav a:hover { color: #fff; }
-
-
-    .hero {
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
-      color: #fff;
-      text-align: center;
-      padding: 80px 24px;
-    }
-    .hero h1 { font-size: 2.2rem; font-weight: 700; margin-bottom: 16px; line-height: 1.4; }
-    .hero p { font-size: 1.1rem; color: #a0aec0; max-width: 600px; margin: 0 auto 32px; line-height: 1.8; }
-    .hero .btn {
-      display: inline-block;
-      background: #e94560;
-      color: #fff;
-      padding: 14px 36px;
-      border-radius: 6px;
+    .logo {
+      font-size: 1.2rem;
+      font-weight: 800;
       text-decoration: none;
-      font-weight: 700;
-      font-size: 1rem;
-      transition: background 0.2s;
+      background: linear-gradient(90deg, #a5b4fc, #f9a8d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.02em;
     }
-    .hero .btn:hover { background: #c73652; }
-
-    .section { padding: 64px 24px; max-width: 960px; margin: 0 auto; }
-    .section h2 { font-size: 1.6rem; font-weight: 700; margin-bottom: 32px; text-align: center; }
-
-    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
-    .card {
-      background: #fff;
-      border-radius: 10px;
-      padding: 28px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-      transition: transform 0.2s;
+    nav { display: flex; gap: 8px; align-items: center; }
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 8px;
+      transition: all 0.2s;
     }
-    .card:hover { transform: translateY(-4px); }
-    .card .tag {
-      display: inline-block;
-      background: #eef2ff;
-      color: #4361ee;
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 4px;
-      margin-bottom: 12px;
-    }
-    .card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
-    .card p { font-size: 0.9rem; color: #555; line-height: 1.7; margin-bottom: 16px; }
-    .card a { color: #4361ee; text-decoration: none; font-size: 0.9rem; font-weight: 600; }
-    .card a:hover { text-decoration: underline; }
+    nav a:hover { color: var(--text); background: var(--surface); }
 
-    .articles { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
-    .article-card {
-      background: #fff;
-      border-radius: 10px;
+    /* ── HERO ── */
+    .hero {
+      position: relative;
       overflow: hidden;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-      transition: transform 0.2s;
-    }
-    .article-card:hover { transform: translateY(-4px); }
-    .article-card .thumb {
-      background: linear-gradient(135deg, #4361ee, #3a0ca3);
-      height: 120px;
+      min-height: 580px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2.5rem;
+      text-align: center;
+      padding: 80px 24px;
     }
-    .article-card .body { padding: 20px; }
-    .article-card .body h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; line-height: 1.5; }
-    .article-card .body p { font-size: 0.85rem; color: #666; line-height: 1.6; margin-bottom: 12px; }
-    .article-card .body a { color: #4361ee; font-size: 0.85rem; font-weight: 600; text-decoration: none; }
-
-    .about {
-      background: #1a1a2e;
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(99,102,241,0.25) 0%, transparent 70%),
+                  radial-gradient(ellipse 50% 40% at 80% 80%, rgba(244,63,94,0.15) 0%, transparent 60%),
+                  var(--bg);
+    }
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 720px; }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(99,102,241,0.15);
+      border: 1px solid rgba(99,102,241,0.35);
+      color: #a5b4fc;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+      letter-spacing: 0.03em;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+    }
+    .hero h1 .grad {
+      background: linear-gradient(90deg, #a5b4fc 0%, #f9a8d4 50%, #fbbf24 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto 36px;
+      line-height: 1.8;
+    }
+    .hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary);
       color: #fff;
-      text-align: center;
-      padding: 64px 24px;
+      padding: 14px 28px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+      box-shadow: 0 0 24px rgba(99,102,241,0.4);
     }
-    .about h2 { font-size: 1.6rem; margin-bottom: 16px; }
-    .about p { color: #a0aec0; max-width: 600px; margin: 0 auto; line-height: 1.8; }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 0 32px rgba(99,102,241,0.5); }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 14px 28px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+    }
+    .btn-ghost:hover { background: var(--bg3); transform: translateY(-2px); }
 
-    footer {
-      background: #111;
-      color: #666;
-      text-align: center;
-      padding: 24px;
-      font-size: 0.85rem;
+    /* ── STATS ── */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg2);
     }
-    footer a { color: #888; text-decoration: none; margin: 0 12px; }
-    footer a:hover { color: #ccc; }
+    .stat {
+      flex: 1;
+      max-width: 200px;
+      text-align: center;
+      padding: 28px 16px;
+      border-right: 1px solid var(--border);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-num {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(90deg, #a5b4fc, #f9a8d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
+
+    /* ── SECTION ── */
+    .section { max-width: 1040px; margin: 0 auto; padding: 80px 24px; }
+    .section-header { text-align: center; margin-bottom: 48px; }
+    .section-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--primary);
+      background: rgba(99,102,241,0.12);
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 12px;
+    }
+    .section-header h2 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+    .section-header p { color: var(--muted); margin-top: 10px; font-size: 0.95rem; }
+
+    /* ── CATEGORY CARDS ── */
+    .cat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .cat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .cat-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(99,102,241,0.06), transparent);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .cat-card:hover { border-color: rgba(99,102,241,0.4); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+    .cat-card:hover::before { opacity: 1; }
+    .cat-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+    .cat-icon.purple { background: rgba(99,102,241,0.15); }
+    .cat-icon.pink { background: rgba(244,63,94,0.12); }
+    .cat-icon.amber { background: rgba(251,191,36,0.12); }
+    .cat-icon svg { width: 24px; height: 24px; }
+    .art-thumb svg { width: 36px; height: 36px; opacity: 0.9; }
+    .cat-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .cat-card p { font-size: 0.875rem; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
+    .cat-link { font-size: 0.85rem; font-weight: 600; color: #a5b4fc; }
+
+    /* ── ARTICLE CARDS ── */
+    .art-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+    .art-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: all 0.25s;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+    }
+    .art-card:hover { border-color: rgba(99,102,241,0.35); transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+    .art-thumb {
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .art-thumb.c1 { background: linear-gradient(135deg, #312e81, #4f46e5); }
+    .art-thumb.c2 { background: linear-gradient(135deg, #7c3aed, #c026d3); }
+    .art-thumb.c3 { background: linear-gradient(135deg, #0f766e, #0891b2); }
+    .art-thumb.c4 { background: linear-gradient(135deg, #b45309, #d97706); }
+    .art-thumb.c5 { background: linear-gradient(135deg, #be123c, #e11d48); }
+    .art-thumb.c6 { background: linear-gradient(135deg, #166534, #16a34a); }
+    .art-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+    .art-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #a5b4fc;
+      background: rgba(99,102,241,0.12);
+      padding: 3px 8px;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    .art-body h3 { font-size: 0.95rem; font-weight: 700; line-height: 1.5; margin-bottom: 8px; }
+    .art-body p { font-size: 0.83rem; color: var(--muted); line-height: 1.65; flex: 1; }
+    .art-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border); }
+    .art-date { font-size: 0.75rem; color: var(--muted); }
+    .art-arrow { font-size: 0.8rem; color: #a5b4fc; font-weight: 600; }
+
+    /* ── CTA SECTION ── */
+    .cta {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .cta-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 80px 24px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 40px;
+    }
+    .cta h2 { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px; }
+    .cta p { color: var(--muted); font-size: 0.95rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+    }
+    .footer-links { display: flex; gap: 24px; justify-content: center; margin-bottom: 16px; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy { font-size: 0.8rem; color: #555; }
+
+    @media (max-width: 640px) {
+      .stats { flex-wrap: wrap; }
+      .stat { min-width: 50%; border-right: none; border-bottom: 1px solid var(--border); }
+      .cta-inner { grid-template-columns: 1fr; }
+      nav a span { display: none; }
+    }
   </style>
 </head>
 <body>
 
+<!-- HEADER -->
 <header>
   <a href="/" class="logo">副業デッキ</a>
   <nav>
@@ -122,104 +348,180 @@
   </nav>
 </header>
 
+<!-- HERO -->
 <section class="hero">
-  <h1>副業をもっとラクにする<br>AIツール・SaaSを比較</h1>
-  <p>どのツールを使えばいいか迷っていませんか？<br>副業デッキは、実際に使ったAIツールとSaaSを比較・紹介します。</p>
-  <a href="/articles/article1.html" class="btn">記事を読む</a>
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">✦ AIツール・SaaS比較メディア</div>
+    <h1>副業をもっとラクにする<br><span class="grad">AIツール</span>を見つけよう</h1>
+    <p>どのツールを使えばいいか迷っていませんか？実際に使ったAIツールとSaaSを正直に比較・レビューします。</p>
+    <div class="hero-btns">
+      <a href="/articles/article5.html" class="btn-primary">▶ まず読む記事</a>
+      <a href="#articles" class="btn-ghost">記事一覧を見る</a>
+    </div>
+  </div>
 </section>
 
+<!-- STATS -->
+<div class="stats">
+  <div class="stat">
+    <div class="stat-num">6+</div>
+    <div class="stat-label">レビュー記事</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">10+</div>
+    <div class="stat-label">比較ツール数</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">3</div>
+    <div class="stat-label">カテゴリ</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">無料</div>
+    <div class="stat-label">全記事無料公開</div>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
 <div class="section">
-  <h2>カテゴリから探す</h2>
-  <div class="cards">
-    <div class="card">
-      <span class="tag">AIツール</span>
+  <div class="section-header">
+    <div class="section-label">CATEGORY</div>
+    <h2>カテゴリから探す</h2>
+    <p>副業に必要なツールをジャンル別にまとめています</p>
+  </div>
+  <div class="cat-grid">
+    <a href="/articles/article1.html" class="cat-card">
+      <div class="cat-icon purple">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#a5b4fc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      </div>
       <h3>AIライティング・文章生成</h3>
       <p>ブログ記事・SNS投稿・メール文章をAIで効率化。副業ライターにおすすめのツールを比較します。</p>
-      <a href="/articles/article1.html">詳しく見る →</a>
-    </div>
-    <div class="card">
-      <span class="tag">業務効率化</span>
+      <span class="cat-link">詳しく見る →</span>
+    </a>
+    <a href="/articles/article2.html" class="cat-card">
+      <div class="cat-icon pink">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#f9a8d4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+      </div>
       <h3>AI議事録・文字起こし</h3>
       <p>会議・打ち合わせを自動で文字起こし。時間を大幅に削減できるAIツールを紹介します。</p>
-      <a href="/articles/article2.html">詳しく見る →</a>
-    </div>
-    <div class="card">
-      <span class="tag">サイト構築</span>
+      <span class="cat-link">詳しく見る →</span>
+    </a>
+    <a href="/articles/article3.html" class="cat-card">
+      <div class="cat-icon amber">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fbbf24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      </div>
       <h3>レンタルサーバー比較</h3>
       <p>副業サイトを作るならどこのサーバーがいい？コスパと安定性で比較しました。</p>
-      <a href="/articles/article3.html">詳しく見る →</a>
-    </div>
+      <span class="cat-link">詳しく見る →</span>
+    </a>
   </div>
 </div>
 
-<div style="background:#fff; padding: 0;">
-  <div class="section">
-    <h2>新着記事</h2>
-    <div class="articles">
-      <div class="article-card">
-        <div class="thumb">✍️</div>
-        <div class="body">
+<!-- ARTICLES -->
+<div style="background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="section" id="articles">
+    <div class="section-header">
+      <div class="section-label">ARTICLES</div>
+      <h2>新着記事</h2>
+      <p>実際に使って分かったことを正直にレビューしています</p>
+    </div>
+    <div class="art-grid">
+      <a href="/articles/article1.html" class="art-card">
+        <div class="art-thumb c1"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+        <div class="art-body">
+          <span class="art-tag">AIツール</span>
           <h3>副業ライターが使うべきAIライティングツール3選【2026年版】</h3>
           <p>文章生成AIを使って副業収入を上げた実体験をもとに、おすすめツールを紹介します。</p>
-          <a href="/articles/article1.html">続きを読む →</a>
+          <div class="art-footer">
+            <span class="art-date">2026.03</span>
+            <span class="art-arrow">続きを読む →</span>
+          </div>
         </div>
-      </div>
-      <div class="article-card">
-        <div class="thumb">🎙️</div>
-        <div class="body">
+      </a>
+      <a href="/articles/article2.html" class="art-card">
+        <div class="art-thumb c2"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></div>
+        <div class="art-body">
+          <span class="art-tag">業務効率化</span>
           <h3>AI文字起こしツール比較｜Nottaを3ヶ月使ってみた正直レビュー</h3>
           <p>会議の議事録作成にかかる時間をゼロにしたAI文字起こしツールをレビューします。</p>
-          <a href="/articles/article2.html">続きを読む →</a>
+          <div class="art-footer">
+            <span class="art-date">2026.03</span>
+            <span class="art-arrow">続きを読む →</span>
+          </div>
         </div>
-      </div>
-      <div class="article-card">
-        <div class="thumb">🖥️</div>
-        <div class="body">
+      </a>
+      <a href="/articles/article3.html" class="art-card">
+        <div class="art-thumb c3"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+        <div class="art-body">
+          <span class="art-tag">サイト構築</span>
           <h3>副業サイトに使えるレンタルサーバー比較｜Xserver vs ConoHa</h3>
           <p>副業ブログを始めるならどちらのサーバーがいい？実際の料金と使いやすさを比較しました。</p>
-          <a href="/articles/article3.html">続きを読む →</a>
+          <div class="art-footer">
+            <span class="art-date">2026.03</span>
+            <span class="art-arrow">続きを読む →</span>
+          </div>
         </div>
-      </div>
-      <div class="article-card">
-        <div class="thumb">📊</div>
-        <div class="body">
+      </a>
+      <a href="/articles/article4.html" class="art-card">
+        <div class="art-thumb c4"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg></div>
+        <div class="art-body">
+          <span class="art-tag">クラウド会計</span>
           <h3>freeeとマネーフォワードどちらを選ぶ？副業者向け徹底比較</h3>
           <p>副業の確定申告に必要なクラウド会計ソフトを副業者目線で比較しました。</p>
-          <a href="/articles/article4.html">続きを読む →</a>
+          <div class="art-footer">
+            <span class="art-date">2026.03</span>
+            <span class="art-arrow">続きを読む →</span>
+          </div>
         </div>
-      </div>
-      <div class="article-card">
-        <div class="thumb">🛠️</div>
-        <div class="body">
+      </a>
+      <a href="/articles/article5.html" class="art-card">
+        <div class="art-thumb c5"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+        <div class="art-body">
+          <span class="art-tag">副業準備</span>
           <h3>副業を始める前に揃えるべきツール5選</h3>
           <p>副業スタートに必要なツールを厳選。最初に何を揃えればいいかをまとめました。</p>
-          <a href="/articles/article5.html">続きを読む →</a>
+          <div class="art-footer">
+            <span class="art-date">2026.03</span>
+            <span class="art-arrow">続きを読む →</span>
+          </div>
         </div>
-      </div>
-      <div class="article-card">
-        <div class="thumb">🖼️</div>
-        <div class="body">
+      </a>
+      <a href="/articles/article6.html" class="art-card">
+        <div class="art-thumb c6"><svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.85)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/><path d="M7 8h4"/><path d="M7 12h8"/></svg></div>
+        <div class="art-body">
+          <span class="art-tag">AIツール</span>
           <h3>AIスライド作成ツール比較｜イルシルを使ってみた正直レビュー</h3>
           <p>AIがスライドを自動生成するイルシルを実際に使って副業での活用価値を検証しました。</p>
-          <a href="/articles/article6.html">続きを読む →</a>
+          <div class="art-footer">
+            <span class="art-date">2026.03</span>
+            <span class="art-arrow">続きを読む →</span>
+          </div>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 </div>
 
-<div class="about">
-  <h2>副業デッキについて</h2>
-  <p>副業デッキは、AIツールやSaaSを実際に使って比較・レビューするメディアです。「どのツールを使えばいいかわからない」という悩みを解決します。</p>
+<!-- CTA -->
+<div class="cta">
+  <div class="cta-inner">
+    <div>
+      <h2>副業デッキについて</h2>
+      <p>AIツールやSaaSを実際に使って比較・レビューするメディアです。<br>「どのツールを選べばいいかわからない」という悩みを解決します。</p>
+    </div>
+    <a href="/about.html" class="btn-ghost">運営者情報を見る</a>
+  </div>
 </div>
 
+<!-- FOOTER -->
 <footer>
-  <p>
+  <div class="footer-links">
     <a href="/about.html">運営者情報</a>
     <a href="/privacy.html">プライバシーポリシー</a>
     <a href="/contact.html">お問い合わせ</a>
-  </p>
-  <p style="margin-top:12px;">© 2026 副業デッキ</p>
+  </div>
+  <div class="footer-copy">© 2026 副業デッキ</div>
 </footer>
 
 </body>
