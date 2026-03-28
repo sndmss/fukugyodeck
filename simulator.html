@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="副業の種類・時間・スキルを入力するだけで、あなたの副業収入ポテンシャルと必要なツールセットを診断します。">
+  <title>副業収入シミュレーター｜副業デッキ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --accent: #f43f5e;
+      --bg: #0f0f13;
+      --bg2: #16161d;
+      --bg3: #1e1e28;
+      --surface: #23232f;
+      --border: rgba(255,255,255,0.08);
+      --text: #f1f1f3;
+      --muted: #9191a8;
+      --radius: 16px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', 'Noto Sans JP', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(15,15,19,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo {
+      font-size: 1.2rem; font-weight: 800; text-decoration: none;
+      background: linear-gradient(90deg, #a5b4fc, #f9a8d4);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    nav a {
+      color: var(--muted); text-decoration: none; font-size: 0.85rem;
+      font-weight: 500; padding: 6px 14px; border-radius: 8px;
+      transition: all 0.2s; margin-left: 4px;
+    }
+    nav a:hover { color: var(--text); background: var(--surface); }
+
+    /* MAIN */
+    .main {
+      max-width: 680px; margin: 0 auto; padding: 48px 24px 80px;
+    }
+
+    /* HERO */
+    .sim-hero { text-align: center; margin-bottom: 48px; }
+    .sim-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(99,102,241,0.15);
+      border: 1px solid rgba(99,102,241,0.35);
+      color: #a5b4fc; font-size: 0.78rem; font-weight: 600;
+      padding: 5px 14px; border-radius: 100px; margin-bottom: 20px;
+    }
+    .sim-hero h1 {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 900; letter-spacing: -0.03em; line-height: 1.25;
+      margin-bottom: 14px;
+    }
+    .sim-hero h1 span {
+      background: linear-gradient(90deg, #a5b4fc, #f9a8d4);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .sim-hero p { color: var(--muted); font-size: 0.95rem; line-height: 1.8; }
+
+    /* PROGRESS */
+    .progress-wrap { margin-bottom: 40px; }
+    .progress-labels {
+      display: flex; justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .progress-label {
+      font-size: 0.72rem; font-weight: 600; color: var(--muted);
+      transition: color 0.3s;
+    }
+    .progress-label.active { color: #a5b4fc; }
+    .progress-bar-bg {
+      height: 4px; background: var(--surface); border-radius: 100px; overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%; border-radius: 100px;
+      background: linear-gradient(90deg, var(--primary), #f9a8d4);
+      transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* STEP CARD */
+    .step-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px;
+      animation: fadeUp 0.4s ease;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .step-num {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--primary);
+      background: rgba(99,102,241,0.12);
+      display: inline-block; padding: 3px 10px; border-radius: 100px;
+      margin-bottom: 14px;
+    }
+    .step-card h2 {
+      font-size: 1.25rem; font-weight: 800;
+      letter-spacing: -0.02em; margin-bottom: 6px;
+    }
+    .step-card p { color: var(--muted); font-size: 0.88rem; margin-bottom: 28px; }
+
+    /* OPTIONS */
+    .options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .options.col3 { grid-template-columns: 1fr 1fr 1fr; }
+    .option {
+      background: var(--bg3);
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 16px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+    }
+    .option:hover { border-color: rgba(99,102,241,0.5); background: rgba(99,102,241,0.08); }
+    .option.selected {
+      border-color: var(--primary);
+      background: rgba(99,102,241,0.15);
+      box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+    }
+    .option-icon { font-size: 1.8rem; margin-bottom: 8px; }
+    .option-label { font-size: 0.85rem; font-weight: 700; margin-bottom: 4px; }
+    .option-sub { font-size: 0.72rem; color: var(--muted); }
+
+    /* NEXT BTN */
+    .btn-next {
+      width: 100%; margin-top: 28px;
+      background: var(--primary);
+      color: #fff; font-weight: 700; font-size: 0.95rem;
+      padding: 15px; border: none; border-radius: 10px;
+      cursor: pointer; transition: all 0.2s;
+      box-shadow: 0 0 24px rgba(99,102,241,0.3);
+      opacity: 0.4; pointer-events: none;
+    }
+    .btn-next.active { opacity: 1; pointer-events: auto; }
+    .btn-next.active:hover { background: var(--primary-dark); transform: translateY(-2px); }
+
+    /* LOADING */
+    .loading {
+      text-align: center; padding: 60px 0;
+      display: none;
+    }
+    .loading.show { display: block; }
+    .spinner {
+      width: 48px; height: 48px;
+      border: 3px solid var(--surface);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .loading p { color: var(--muted); font-size: 0.9rem; }
+
+    /* RESULT */
+    .result { display: none; animation: fadeUp 0.5s ease; }
+    .result.show { display: block; }
+
+    .result-hero {
+      text-align: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 40px 32px;
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .result-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(99,102,241,0.2), transparent);
+    }
+    .result-hero-inner { position: relative; z-index: 1; }
+    .result-label {
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 12px;
+    }
+    .result-amount {
+      font-size: clamp(3rem, 10vw, 5rem);
+      font-weight: 900; letter-spacing: -0.04em; line-height: 1;
+      background: linear-gradient(90deg, #a5b4fc 0%, #f9a8d4 50%, #fbbf24 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+    .result-unit { font-size: 1rem; color: var(--muted); margin-bottom: 24px; }
+    .result-tags { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+    .result-tag {
+      background: rgba(99,102,241,0.12);
+      border: 1px solid rgba(99,102,241,0.25);
+      color: #a5b4fc;
+      font-size: 0.78rem; font-weight: 600;
+      padding: 5px 12px; border-radius: 100px;
+    }
+
+    /* STATS ROW */
+    .stats-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px; margin-bottom: 24px;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px; padding: 20px;
+    }
+    .stat-card-label { font-size: 0.75rem; color: var(--muted); margin-bottom: 6px; }
+    .stat-card-value { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em; }
+    .stat-card-value.green { color: #34d399; }
+    .stat-card-value.amber { color: #fbbf24; }
+
+    /* TOOLS */
+    .tools-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px; margin-bottom: 24px;
+    }
+    .tools-section-header { margin-bottom: 20px; }
+    .tools-section-header h3 { font-size: 1rem; font-weight: 800; margin-bottom: 4px; }
+    .tools-section-header p { font-size: 0.82rem; color: var(--muted); }
+
+    .tool-item {
+      display: flex; align-items: center; gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .tool-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .tool-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; flex-shrink: 0;
+    }
+    .tool-info { flex: 1; }
+    .tool-name { font-size: 0.9rem; font-weight: 700; margin-bottom: 3px; }
+    .tool-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+    .tool-price { font-size: 0.75rem; color: #34d399; font-weight: 600; }
+    .tool-btn {
+      display: inline-block;
+      background: rgba(99,102,241,0.15);
+      border: 1px solid rgba(99,102,241,0.3);
+      color: #a5b4fc;
+      font-size: 0.78rem; font-weight: 700;
+      padding: 7px 14px; border-radius: 8px;
+      text-decoration: none; transition: all 0.2s; white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .tool-btn:hover { background: rgba(99,102,241,0.3); }
+
+    /* COST SUMMARY */
+    .cost-summary {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 10px; padding: 16px 20px;
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 16px;
+    }
+    .cost-summary span { font-size: 0.85rem; color: var(--muted); }
+    .cost-summary strong { font-size: 1rem; font-weight: 800; color: #34d399; }
+
+    /* SHARE */
+    .share-section {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px; text-align: center; margin-bottom: 24px;
+    }
+    .share-section h3 { font-size: 1rem; font-weight: 800; margin-bottom: 6px; }
+    .share-section p { font-size: 0.85rem; color: var(--muted); margin-bottom: 20px; }
+    .share-preview {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 10px; padding: 16px; text-align: left;
+      font-size: 0.85rem; color: var(--muted);
+      margin-bottom: 16px; line-height: 1.7;
+    }
+    .btn-share {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #000; color: #fff;
+      font-weight: 700; font-size: 0.9rem;
+      padding: 13px 28px; border-radius: 10px;
+      text-decoration: none; transition: all 0.2s;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    .btn-share:hover { background: #111; transform: translateY(-2px); }
+
+    /* RETRY */
+    .btn-retry {
+      width: 100%; background: transparent;
+      border: 1px solid var(--border); color: var(--muted);
+      font-size: 0.88rem; font-weight: 600;
+      padding: 13px; border-radius: 10px; cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-retry:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
+
+    /* FOOTER */
+    footer {
+      background: var(--bg); border-top: 1px solid var(--border);
+      padding: 24px; text-align: center;
+    }
+    .footer-links { display: flex; gap: 24px; justify-content: center; margin-bottom: 10px; }
+    .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.82rem; }
+    .footer-copy { font-size: 0.78rem; color: #555; }
+
+    @media (max-width: 480px) {
+      .options { grid-template-columns: 1fr; }
+      .options.col3 { grid-template-columns: 1fr 1fr; }
+      .stats-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="/" class="logo">副業デッキ</a>
+  <nav>
+    <a href="/about.html">運営者情報</a>
+    <a href="/contact.html">お問い合わせ</a>
+  </nav>
+</header>
+
+<div class="main">
+
+  <!-- HERO -->
+  <div class="sim-hero">
+    <div class="sim-badge">⚡ 無料診断ツール</div>
+    <h1>あなたの<span>副業収入</span>ポテンシャルを<br>今すぐ診断</h1>
+    <p>4つの質問に答えるだけ。あなたが今の状況から<br>どれだけ稼げるかと、必要なツールセットを提案します。</p>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-wrap" id="progressWrap">
+    <div class="progress-labels">
+      <span class="progress-label active" id="lbl1">副業の種類</span>
+      <span class="progress-label" id="lbl2">使える時間</span>
+      <span class="progress-label" id="lbl3">スキルレベル</span>
+      <span class="progress-label" id="lbl4">目標月収</span>
+    </div>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- STEP 1 -->
+  <div class="step-card" id="step1">
+    <div class="step-num">STEP 1 / 4</div>
+    <h2>副業の種類を選んでください</h2>
+    <p>メインで取り組みたい副業を1つ選んでください</p>
+    <div class="options" id="opts1">
+      <div class="option" data-val="writing">
+        <div class="option-icon">✍️</div>
+        <div class="option-label">ライティング</div>
+        <div class="option-sub">ブログ・記事・コピー</div>
+      </div>
+      <div class="option" data-val="video">
+        <div class="option-icon">🎬</div>
+        <div class="option-label">動画編集</div>
+        <div class="option-sub">YouTube・SNS動画</div>
+      </div>
+      <div class="option" data-val="design">
+        <div class="option-icon">🎨</div>
+        <div class="option-label">デザイン</div>
+        <div class="option-sub">バナー・資料・SNS</div>
+      </div>
+      <div class="option" data-val="programming">
+        <div class="option-icon">💻</div>
+        <div class="option-label">プログラミング</div>
+        <div class="option-sub">開発・自動化・AI</div>
+      </div>
+      <div class="option" data-val="consulting">
+        <div class="option-icon">🎓</div>
+        <div class="option-label">コンサル・教育</div>
+        <div class="option-sub">コーチング・講師</div>
+      </div>
+      <div class="option" data-val="other">
+        <div class="option-icon">🛠️</div>
+        <div class="option-label">その他</div>
+        <div class="option-sub">物販・翻訳など</div>
+      </div>
+    </div>
+    <button class="btn-next" id="next1">次へ →</button>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step-card" id="step2" style="display:none">
+    <div class="step-num">STEP 2 / 4</div>
+    <h2>週に使える時間はどのくらいですか？</h2>
+    <p>副業に充てられる時間（本業・家事・育児後の残り時間）</p>
+    <div class="options col3" id="opts2">
+      <div class="option" data-val="5">
+        <div class="option-icon">🌙</div>
+        <div class="option-label">5時間以内</div>
+        <div class="option-sub">平日の空き時間のみ</div>
+      </div>
+      <div class="option" data-val="10">
+        <div class="option-icon">⏰</div>
+        <div class="option-label">約10時間</div>
+        <div class="option-sub">平日＋週末少し</div>
+      </div>
+      <div class="option" data-val="20">
+        <div class="option-icon">🔥</div>
+        <div class="option-label">約20時間</div>
+        <div class="option-sub">週末もしっかり</div>
+      </div>
+      <div class="option" data-val="30">
+        <div class="option-icon">⚡</div>
+        <div class="option-label">30時間以上</div>
+        <div class="option-sub">副業に本気投資</div>
+      </div>
+    </div>
+    <button class="btn-next" id="next2">次へ →</button>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step-card" id="step3" style="display:none">
+    <div class="step-num">STEP 3 / 4</div>
+    <h2>現在のスキルレベルは？</h2>
+    <p>正直に答えるほど精度が上がります</p>
+    <div class="options col3" id="opts3">
+      <div class="option" data-val="beginner">
+        <div class="option-icon">🌱</div>
+        <div class="option-label">初心者</div>
+        <div class="option-sub">ほぼ未経験</div>
+      </div>
+      <div class="option" data-val="middle">
+        <div class="option-icon">📈</div>
+        <div class="option-label">中級者</div>
+        <div class="option-sub">少し経験あり</div>
+      </div>
+      <div class="option" data-val="advanced">
+        <div class="option-icon">🚀</div>
+        <div class="option-label">上級者</div>
+        <div class="option-sub">実績・案件経験あり</div>
+      </div>
+    </div>
+    <button class="btn-next" id="next3">次へ →</button>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step-card" id="step4" style="display:none">
+    <div class="step-num">STEP 4 / 4</div>
+    <h2>目標の月収を教えてください</h2>
+    <p>副業で達成したい月収の目標</p>
+    <div class="options col3" id="opts4">
+      <div class="option" data-val="30000">
+        <div class="option-icon">☕</div>
+        <div class="option-label">月3万円</div>
+        <div class="option-sub">まず小さく稼ぐ</div>
+      </div>
+      <div class="option" data-val="50000">
+        <div class="option-icon">💡</div>
+        <div class="option-label">月5万円</div>
+        <div class="option-sub">生活費の足しに</div>
+      </div>
+      <div class="option" data-val="100000">
+        <div class="option-icon">🏆</div>
+        <div class="option-label">月10万円</div>
+        <div class="option-sub">本格的に稼ぐ</div>
+      </div>
+      <div class="option" data-val="300000">
+        <div class="option-icon">🌟</div>
+        <div class="option-label">月30万円以上</div>
+        <div class="option-sub">独立・脱サラを視野に</div>
+      </div>
+    </div>
+    <button class="btn-next" id="next4">診断する →</button>
+  </div>
+
+  <!-- LOADING -->
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <p>あなたの副業ポテンシャルを計算中...</p>
+  </div>
+
+  <!-- RESULT -->
+  <div class="result" id="result">
+
+    <div class="result-hero">
+      <div class="result-hero-inner">
+        <div class="result-label">あなたの副業収入ポテンシャル</div>
+        <div class="result-amount" id="resultAmount">0</div>
+        <div class="result-unit">円 / 月</div>
+        <div class="result-tags" id="resultTags"></div>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-card-label">目標達成までの目安</div>
+        <div class="stat-card-value amber" id="resultMonths">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-label">AIツール活用で短縮できる期間</div>
+        <div class="stat-card-value green" id="resultShorten">—</div>
+      </div>
+    </div>
+
+    <div class="tools-section">
+      <div class="tools-section-header">
+        <h3>あなたに最適なツールセット</h3>
+        <p>このセットを使うことでポテンシャルを最大化できます</p>
+      </div>
+      <div id="toolList"></div>
+      <div class="cost-summary">
+        <span>ツール月額合計</span>
+        <strong id="totalCost">—</strong>
+      </div>
+    </div>
+
+    <div class="share-section">
+      <h3>結果をXでシェアする</h3>
+      <p>友達や同僚にも診断を勧めてみましょう</p>
+      <div class="share-preview" id="shareText"></div>
+      <a href="#" class="btn-share" id="shareBtn" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        ポストする
+      </a>
+    </div>
+
+    <button class="btn-retry" id="retryBtn">もう一度診断する</button>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="/">トップ</a>
+    <a href="/about.html">運営者情報</a>
+    <a href="/privacy.html">プライバシーポリシー</a>
+    <a href="/contact.html">お問い合わせ</a>
+  </div>
+  <div class="footer-copy">© 2026 副業デッキ</div>
+</footer>
+
+<script>
+  const answers = { type: null, hours: null, level: null, goal: null };
+
+  // ツールデータ
+  const toolDB = {
+    writing: [
+      { name: 'Claude', desc: '日本語最高精度のAIライティングアシスタント。記事構成から下書きまで対応', price: '無料〜', cost: 0, icon: '🤖', color: 'rgba(99,102,241,0.15)', link: '#' },
+      { name: 'Notta', desc: 'クライアントとの打ち合わせを自動文字起こし。議事録作成時間をゼロに', price: '無料〜月1,500円', cost: 0, icon: '🎙️', color: 'rgba(244,63,94,0.12)', link: '#' },
+      { name: 'freee', desc: '副業収入の帳簿管理・確定申告を自動化。収入が増えたら必須', price: '月1,078円〜', cost: 1078, icon: '📊', color: 'rgba(52,211,153,0.12)', link: '#' },
+    ],
+    video: [
+      { name: 'Claude', desc: '動画の台本・概要欄・タイトル案を高速生成。制作時間を大幅短縮', price: '無料〜', cost: 0, icon: '🤖', color: 'rgba(99,102,241,0.15)', link: '#' },
+      { name: 'Canva', desc: 'サムネイル・テロップ素材をテンプレートで即作成。デザイン知識不要', price: '無料〜月1,500円', cost: 0, icon: '🎨', color: 'rgba(251,191,36,0.12)', link: '#' },
+      { name: 'freee', desc: '動画制作の経費管理・確定申告を効率化。機材代も経費計上できる', price: '月1,078円〜', cost: 1078, icon: '📊', color: 'rgba(52,211,153,0.12)', link: '#' },
+    ],
+    design: [
+      { name: 'Canva', desc: 'プロ品質のデザインをテンプレートで即作成。副業デザイナーの必須ツール', price: '無料〜月1,500円', cost: 0, icon: '🎨', color: 'rgba(251,191,36,0.12)', link: '#' },
+      { name: 'イルシル', desc: 'AIがスライド・提案書を自動生成。クライアントへの提案書作成が劇的に速くなる', price: '月要確認', cost: 0, icon: '🖼️', color: 'rgba(139,92,246,0.15)', link: '#' },
+      { name: 'freee', desc: 'デザイン副業の収入・経費を自動管理。確定申告も楽になる', price: '月1,078円〜', cost: 1078, icon: '📊', color: 'rgba(52,211,153,0.12)', link: '#' },
+    ],
+    programming: [
+      { name: 'Claude', desc: 'コードレビュー・バグ修正・ドキュメント作成を高速化。開発効率が2〜3倍に', price: '無料〜', cost: 0, icon: '🤖', color: 'rgba(99,102,241,0.15)', link: '#' },
+      { name: 'Xserver', desc: '副業で作ったWebサービスの公開に。安定性No.1のレンタルサーバー', price: '月990円〜', cost: 990, icon: '🖥️', color: 'rgba(14,165,233,0.12)', link: '#' },
+      { name: 'freee', desc: '開発副業の収入管理。源泉徴収・確定申告の煩雑さを解消', price: '月1,078円〜', cost: 1078, icon: '📊', color: 'rgba(52,211,153,0.12)', link: '#' },
+    ],
+    consulting: [
+      { name: 'Notta', desc: 'コーチング・コンサル面談を自動文字起こし。アフター対応の質が上がる', price: '無料〜月1,500円', cost: 0, icon: '🎙️', color: 'rgba(244,63,94,0.12)', link: '#' },
+      { name: 'イルシル', desc: 'AIが提案書・教材スライドを自動生成。クライアントへの資料作成時間を80%削減', price: '月要確認', cost: 0, icon: '🖼️', color: 'rgba(139,92,246,0.15)', link: '#' },
+      { name: 'freee', desc: 'コンサル収入の請求書発行・帳簿管理を自動化。確定申告もスムーズに', price: '月1,078円〜', cost: 1078, icon: '📊', color: 'rgba(52,211,153,0.12)', link: '#' },
+    ],
+    other: [
+      { name: 'Claude', desc: 'どんな副業でも文章・企画・調査をAIで効率化。汎用性No.1のAIツール', price: '無料〜', cost: 0, icon: '🤖', color: 'rgba(99,102,241,0.15)', link: '#' },
+      { name: 'freee', desc: '副業収入の帳簿管理・確定申告を自動化。収入が増えたら必須', price: '月1,078円〜', cost: 1078, icon: '📊', color: 'rgba(52,211,153,0.12)', link: '#' },
+      { name: 'Xserver', desc: '副業の実績・ポートフォリオサイトを作るためのサーバー。信頼感が上がる', price: '月990円〜', cost: 990, icon: '🖥️', color: 'rgba(14,165,233,0.12)', link: '#' },
+    ],
+  };
+
+  // 収入計算ロジック
+  const baseRate = { writing: 1200, video: 2000, design: 1800, programming: 3500, consulting: 4000, other: 1000 };
+  const levelMult = { beginner: 0.4, middle: 0.75, advanced: 1.0 };
+  const hoursPerMonth = { 5: 18, 10: 38, 20: 76, 30: 120 };
+  const typeLabel = { writing: 'ライティング', video: '動画編集', design: 'デザイン', programming: 'プログラミング', consulting: 'コンサル・教育', other: 'その他' };
+  const levelLabel = { beginner: '初心者', middle: '中級者', advanced: '上級者' };
+
+  function calcIncome() {
+    const h = hoursPerMonth[answers.hours];
+    const r = baseRate[answers.type];
+    const m = levelMult[answers.level];
+    return Math.round(h * r * m / 1000) * 1000;
+  }
+
+  function calcMonths(income, goal) {
+    if (income >= goal) return '今すぐ達成可能';
+    const growthPerMonth = income * 0.15;
+    if (growthPerMonth <= 0) return '—';
+    let cur = income, months = 0;
+    while (cur < goal && months < 36) { cur += growthPerMonth; months++; }
+    return months >= 36 ? '36ヶ月以上' : `約${months}ヶ月`;
+  }
+
+  // ステップ制御
+  function setupStep(stepId, optsId, nextId, key, progress, nextStepId, nextLblId) {
+    const opts = document.querySelectorAll(`#${optsId} .option`);
+    const btn = document.getElementById(nextId);
+    opts.forEach(opt => {
+      opt.addEventListener('click', () => {
+        opts.forEach(o => o.classList.remove('selected'));
+        opt.classList.add('selected');
+        answers[key] = opt.dataset.val;
+        btn.classList.add('active');
+      });
+    });
+    btn.addEventListener('click', () => {
+      if (!answers[key]) return;
+      document.getElementById(stepId).style.display = 'none';
+      document.getElementById('progressFill').style.width = progress + '%';
+      if (nextLblId) document.getElementById(nextLblId).classList.add('active');
+      if (nextStepId === 'loading') {
+        showLoading();
+      } else {
+        document.getElementById(nextStepId).style.display = 'block';
+      }
+    });
+  }
+
+  setupStep('step1', 'opts1', 'next1', 'type',  25, 'step2', 'lbl2');
+  setupStep('step2', 'opts2', 'next2', 'hours', 50, 'step3', 'lbl3');
+  setupStep('step3', 'opts3', 'next3', 'level', 75, 'step4', 'lbl4');
+  setupStep('step4', 'opts4', 'next4', 'goal', 100, 'loading', null);
+
+  function showLoading() {
+    document.getElementById('progressFill').style.width = '100%';
+    document.getElementById('loading').classList.add('show');
+    setTimeout(showResult, 2200);
+  }
+
+  function animateNumber(el, target) {
+    const duration = 1200;
+    const start = Date.now();
+    const tick = () => {
+      const p = Math.min((Date.now() - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * ease).toLocaleString();
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  function showResult() {
+    document.getElementById('loading').classList.remove('show');
+    const result = document.getElementById('result');
+    result.classList.add('show');
+
+    const income = calcIncome();
+    const goal = parseInt(answers.goal);
+    const months = calcMonths(income, goal);
+    const shortenMonths = Math.round(parseInt(months) * 0.35);
+
+    // 金額アニメーション
+    animateNumber(document.getElementById('resultAmount'), income);
+
+    // タグ
+    document.getElementById('resultTags').innerHTML = `
+      <span class="result-tag">${typeLabel[answers.type]}</span>
+      <span class="result-tag">週${answers.hours}時間</span>
+      <span class="result-tag">${levelLabel[answers.level]}</span>
+    `;
+
+    // 達成期間
+    document.getElementById('resultMonths').textContent = months;
+    document.getElementById('resultShorten').textContent =
+      (typeof shortenMonths === 'number' && !isNaN(shortenMonths)) ? `約${shortenMonths}ヶ月短縮` : '—';
+
+    // ツールリスト
+    const tools = toolDB[answers.type];
+    let totalCost = 0;
+    document.getElementById('toolList').innerHTML = tools.map(t => {
+      totalCost += t.cost;
+      return `
+        <div class="tool-item">
+          <div class="tool-icon" style="background:${t.color}">${t.icon}</div>
+          <div class="tool-info">
+            <div class="tool-name">${t.name}</div>
+            <div class="tool-desc">${t.desc}</div>
+            <div class="tool-price">${t.price}</div>
+          </div>
+          <a href="${t.link}" class="tool-btn" target="_blank" rel="noopener">詳しく見る</a>
+        </div>
+      `;
+    }).join('');
+    document.getElementById('totalCost').textContent =
+      totalCost === 0 ? '無料〜始められる' : `月${totalCost.toLocaleString()}円〜`;
+
+    // シェアテキスト
+    const shareMsg = `副業デッキの収入シミュレーターで診断したら、月${income.toLocaleString()}円のポテンシャルがあるとわかった💡\n\n${typeLabel[answers.type]}×週${answers.hours}時間で計算。あなたは？\n\nhttps://fukugyodeck.com/simulator.html\n#副業 #副業デッキ`;
+    document.getElementById('shareText').textContent = shareMsg;
+    document.getElementById('shareBtn').href =
+      'https://twitter.com/intent/tweet?text=' + encodeURIComponent(shareMsg);
+  }
+
+  // リトライ
+  document.getElementById('retryBtn').addEventListener('click', () => {
+    answers.type = answers.hours = answers.level = answers.goal = null;
+    ['step2','step3','step4'].forEach(id => document.getElementById(id).style.display = 'none');
+    document.getElementById('result').classList.remove('show');
+    document.getElementById('progressFill').style.width = '0%';
+    ['lbl2','lbl3','lbl4'].forEach(id => document.getElementById(id).classList.remove('active'));
+    document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+    document.querySelectorAll('.btn-next').forEach(b => b.classList.remove('active'));
+    document.getElementById('step1').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+
+</body>
+</html>
