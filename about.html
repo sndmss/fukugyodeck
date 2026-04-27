@@ -3,8 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="副業デッキの運営者情報です。AIツール・副業SaaSを実際に使って比較・レビューしています。">
+  <meta name="description" content="副業デッキの運営者情報。AIツール・副業SaaSを実際に使って正直に比較するメディアです。運営者の経歴・サイトの方針・記事の評価基準を掲載しています。">
   <title>運営者情報｜副業デッキ</title>
+  <!-- OGP -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="運営者情報｜副業デッキ">
+  <meta property="og:description" content="副業デッキの運営者情報。AIツール・副業SaaSを実際に使って正直に比較するメディアです。">
+  <meta property="og:url" content="https://fukugyodeck.com/about.html">
+  <meta property="og:site_name" content="副業デッキ">
+  <meta name="twitter:card" content="summary">
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-KCG1DGH81P"></script>
   <script>
@@ -16,57 +23,53 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Hiragino Sans', 'Noto Sans JP', sans-serif; color: #1a1a2e; background: #f8f9fa; }
-    header {
-      background: #1a1a2e;
-      padding: 16px 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
+    header { background: #1a1a2e; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; }
     header .logo { color: #fff; font-size: 1.4rem; font-weight: 700; text-decoration: none; }
     header nav a { color: #ccc; text-decoration: none; margin-left: 24px; font-size: 0.9rem; }
     header nav a:hover { color: #fff; }
     .container { max-width: 800px; margin: 0 auto; padding: 64px 24px; }
-    h1 { font-size: 1.8rem; margin-bottom: 40px; }
-    .profile {
-      background: #fff;
-      border-radius: 10px;
-      padding: 40px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-      display: flex;
-      gap: 32px;
-      align-items: flex-start;
-      margin-bottom: 40px;
-    }
-    .avatar {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #4361ee, #3a0ca3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2.5rem;
-      flex-shrink: 0;
-    }
-    .profile-body h2 { font-size: 1.3rem; margin-bottom: 8px; }
-    .profile-body .tag { display: inline-block; background: #eef2ff; color: #4361ee; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 4px; margin-bottom: 16px; }
-    .profile-body p { font-size: 0.95rem; line-height: 1.9; color: #555; }
-    h2 { font-size: 1.2rem; font-weight: 700; margin: 40px 0 16px; padding-left: 12px; border-left: 4px solid #e94560; }
+    h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 40px; }
+    h2 { font-size: 1.2rem; font-weight: 700; margin: 48px 0 16px; padding-left: 12px; border-left: 4px solid #e94560; }
+    p { font-size: 0.95rem; line-height: 1.9; color: #444; margin-bottom: 16px; }
+    ul { padding-left: 24px; margin-bottom: 16px; }
+    li { font-size: 0.95rem; line-height: 1.9; color: #444; margin-bottom: 6px; }
+    a { color: #4361ee; }
+    .profile { background: #fff; border-radius: 12px; padding: 40px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); display: flex; gap: 32px; align-items: flex-start; margin-bottom: 16px; }
+    .avatar { width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, #4361ee, #3a0ca3); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; flex-shrink: 0; }
+    .profile-body h2 { font-size: 1.3rem; margin: 0 0 8px; padding: 0; border: none; }
+    .profile-body .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .tag { display: inline-block; background: #eef2ff; color: #4361ee; font-size: 0.75rem; font-weight: 700; padding: 4px 10px; border-radius: 4px; }
+    .profile-body p { font-size: 0.95rem; line-height: 1.9; color: #555; margin: 0; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 24px 0; }
+    .stat-card { background: #fff; border-radius: 10px; padding: 20px; text-align: center; box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
+    .stat-num { font-size: 2rem; font-weight: 700; color: #4361ee; display: block; }
+    .stat-label { font-size: 0.8rem; color: #888; margin-top: 4px; display: block; }
+    .mission { background: #eef2ff; border-radius: 12px; padding: 28px; margin: 24px 0; border: 1px solid #c7d2fe; }
+    .mission h3 { font-size: 1rem; font-weight: 700; color: #4361ee; margin-bottom: 12px; }
+    .mission p { margin: 0; color: #444; }
+    .policy-card { background: #fff; border-radius: 10px; padding: 20px 24px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); margin: 12px 0; border-left: 4px solid #4361ee; }
+    .policy-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; }
+    .policy-card p { font-size: 0.9rem; color: #555; margin: 0; }
+    .history { background: #fff; border-radius: 10px; padding: 28px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); margin: 24px 0; }
+    .history-item { display: flex; gap: 16px; margin-bottom: 20px; }
+    .history-item:last-child { margin-bottom: 0; }
+    .history-date { font-size: 0.85rem; font-weight: 700; color: #4361ee; white-space: nowrap; min-width: 80px; padding-top: 2px; }
+    .history-body { font-size: 0.9rem; color: #444; line-height: 1.7; }
     .info-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
     .info-table th { background: #f8f9fa; padding: 14px 20px; font-size: 0.9rem; text-align: left; width: 160px; color: #666; border-bottom: 1px solid #eee; }
     .info-table td { padding: 14px 20px; font-size: 0.9rem; color: #444; border-bottom: 1px solid #eee; }
     .info-table tr:last-child th, .info-table tr:last-child td { border-bottom: none; }
-    p { font-size: 0.95rem; line-height: 1.9; color: #444; margin-bottom: 16px; }
-    footer {
-      background: #111;
-      color: #666;
-      text-align: center;
-      padding: 24px;
-      font-size: 0.85rem;
-      margin-top: 80px;
-    }
+    .sns-links { display: flex; gap: 12px; flex-wrap: wrap; margin: 16px 0; }
+    .sns-btn { display: inline-block; padding: 10px 20px; border-radius: 8px; font-size: 0.9rem; font-weight: 700; text-decoration: none; }
+    .sns-x { background: #000; color: #fff; }
+    .sns-note { background: #41C9B4; color: #fff; }
+    .warning { background: #fffbeb; border: 1px solid #fcd34d; border-radius: 8px; padding: 16px 20px; margin: 24px 0; font-size: 0.9rem; color: #92400e; }
+    footer { background: #111; color: #666; text-align: center; padding: 24px; font-size: 0.85rem; margin-top: 80px; }
     footer a { color: #888; text-decoration: none; margin: 0 12px; }
+    @media (max-width: 600px) {
+      .profile { flex-direction: column; align-items: center; text-align: center; }
+      .stats { grid-template-columns: repeat(3, 1fr); }
+    }
   </style>
 </head>
 <body>
@@ -87,13 +90,88 @@
     <div class="avatar">🧑‍💻</div>
     <div class="profile-body">
       <h2>副業デッキ 編集部</h2>
-      <span class="tag">AIツール・副業SaaS研究</span>
-      <p>AIツールと副業に役立つSaaSを実際に使いながら比較・レビューしています。「どのツールを選べばいいかわからない」という悩みを持つ方に、使って分かった正直な情報をお届けします。</p>
+      <div class="tags">
+        <span class="tag">AIツール研究</span>
+        <span class="tag">副業SaaS比較</span>
+        <span class="tag">会社員×副業</span>
+      </div>
+      <p>会社員として働きながら副業を研究・実践しています。Notta・freee・イルシルなど副業に役立つAIツール・SaaSを実際に使い、メリット・デメリットを正直にレビューするメディア「副業デッキ」を運営しています。「ツールを知らないせいで損をしている人をなくしたい」という思いでサイトを立ち上げました。</p>
     </div>
   </div>
 
-  <h2>サイトについて</h2>
-  <p>副業デッキは、AIツール・SaaSを実際に使って比較・レビューするメディアです。アフィリエイト広告を掲載していますが、報酬が記事内容に影響することはありません。実際の使用体験をもとに、メリット・デメリットを正直に記載しています。</p>
+  <div class="stats">
+    <div class="stat-card">
+      <span class="stat-num">15+</span>
+      <span class="stat-label">掲載記事数</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">10+</span>
+      <span class="stat-label">検証済みツール数</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-num">2026</span>
+      <span class="stat-label">運営開始年</span>
+    </div>
+  </div>
+
+  <h2>このサイトのミッション</h2>
+  <div class="mission">
+    <h3>「ツールを知らないせいで損をしている人をなくす」</h3>
+    <p>副業で稼げない理由の多くは、スキル不足でも時間不足でもなく「便利なツールを知らないこと」だと感じています。Notta・freee・イルシルなどのAIツールを使うことで、副業の作業時間は大幅に短縮できます。このサイトでは実際に使ったツールの正直なレビューと、副業を始めるために必要な情報を提供します。</p>
+  </div>
+
+  <h2>運営者の経歴・バックグラウンド</h2>
+  <p>会社員として働きながら副業を始め、試行錯誤を繰り返してきました。最初は何から始めればいいかわからず、ツール選びや確定申告の知識不足で遠回りした経験があります。その経験をもとに「自分が最初に知りたかった情報」を記事にまとめています。</p>
+  <ul>
+    <li>副業歴：1年以上</li>
+    <li>実際に使用・検証したツール：Notta・freee・イルシル・ConoHa WING・クラウドワークスなど10種類以上</li>
+    <li>副業ジャンル：ブログ・アフィリエイト・情報発信</li>
+    <li>確定申告：freeeを使って自力で申告経験あり</li>
+  </ul>
+
+  <h2>サイトの更新履歴</h2>
+  <div class="history">
+    <div class="history-item">
+      <span class="history-date">2026年4月</span>
+      <span class="history-body">記事15本体制に拡充。クラウドワークス・ランサーズ比較、Webライター始め方、在宅副業10選などを追加。</span>
+    </div>
+    <div class="history-item">
+      <span class="history-date">2026年4月</span>
+      <span class="history-body">ConoHa WING・イルシル・Nottaのアフィリエイトリンクを各記事に実装。OGPタグを全記事に追加。</span>
+    </div>
+    <div class="history-item">
+      <span class="history-date">2026年3月</span>
+      <span class="history-body">副業デッキ（fukugyodeck.com）を開設。AIツール・副業SaaS比較メディアとしてスタート。</span>
+    </div>
+  </div>
+
+  <h2>記事の評価・執筆方針</h2>
+
+  <div class="policy-card">
+    <h3>✅ 実際に使って検証する</h3>
+    <p>掲載しているツール・サービスはすべて実際に使用・検証したものです。使っていないツールは掲載しません。体験に基づいた具体的な情報をお届けします。</p>
+  </div>
+
+  <div class="policy-card">
+    <h3>✅ デメリットも正直に書く</h3>
+    <p>アフィリエイト報酬が発生するサービスであっても、デメリット・向いていない人の情報を必ず記載します。読者に合わないサービスを無理におすすめすることはしません。</p>
+  </div>
+
+  <div class="policy-card">
+    <h3>✅ 情報を定期的に更新する</h3>
+    <p>ツールの料金・機能は変更されることがあります。できる限り最新情報に更新するよう努めていますが、最終確認は必ず公式サイトでお願いします。</p>
+  </div>
+
+  <div class="policy-card">
+    <h3>✅ 広告表示の透明性</h3>
+    <p>当サイトはA8.net・もしもアフィリエイトのアフィリエイト広告を掲載しています。広告リンクには「rel="nofollow"」を設定しており、記事内容は報酬の有無に関わらず中立的な立場で執筆しています。</p>
+  </div>
+
+  <h2>SNS・外部メディア</h2>
+  <p>noteでは副業の実体験や、サイトには書ききれない裏話を発信しています。</p>
+  <div class="sns-links">
+    <a href="https://note.com/fukugyodeck" class="sns-btn sns-note" target="_blank" rel="nofollow noopener">📝 note</a>
+  </div>
 
   <h2>運営情報</h2>
   <table class="info-table">
@@ -111,17 +189,26 @@
     </tr>
     <tr>
       <th>掲載内容</th>
-      <td>AIツール・副業SaaS・仕事効率化ツールの比較・レビュー</td>
+      <td>AIツール・副業SaaS・副業の始め方・確定申告・節税の比較・解説記事</td>
     </tr>
     <tr>
-      <th>広告について</th>
-      <td>A8.net・もしもアフィリエイトのアフィリエイト広告を掲載しています</td>
+      <th>収益化方法</th>
+      <td>アフィリエイト広告（A8.net・もしもアフィリエイト経由）</td>
+    </tr>
+    <tr>
+      <th>提携ASP</th>
+      <td>A8.net・もしもアフィリエイト</td>
     </tr>
     <tr>
       <th>お問い合わせ</th>
       <td><a href="/contact.html">お問い合わせページ</a>よりご連絡ください</td>
     </tr>
   </table>
+
+  <div class="warning">
+    ⚠️ 当サイトの情報は執筆時点のものです。ツールの料金・仕様・サービス内容は変更される場合があります。最新情報は必ず各サービスの公式サイトでご確認ください。
+  </div>
+
 </div>
 
 <footer>
